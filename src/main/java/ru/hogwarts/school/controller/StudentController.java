@@ -11,43 +11,44 @@ import java.util.List;
 @RequestMapping("student;")
 public class StudentController {
 
-        private final StudentService studentService;
+    private final StudentService studentService;
 
-        public StudentController(StudentService studentService) {
-            this.studentService = studentService;
-        }
+    public StudentController(StudentService studentService) {
+        this.studentService = studentService;
+    }
 
-        @PostMapping
-        public ResponseEntity createStudent(@RequestBody Student student) {
-            Student createdStudent = studentService.createStudent(student);
-            return ResponseEntity.ok(createdStudent);
-        }
+    @PostMapping
+    public ResponseEntity createStudent(@RequestBody Student student) {
+        Student createdStudent = studentService.createStudent(student);
+        return ResponseEntity.ok(createdStudent);
+    }
 
-        @GetMapping("{studentId}")
-        public ResponseEntity getStudent(@PathVariable Long studentId) {
-            Student student = studentService.getStudentById(studentId);
-            if (student == null) {
-                return ResponseEntity.notFound().build();
-            }
-            return ResponseEntity.ok(student);
+    @GetMapping("{studentId}")
+    public ResponseEntity getStudent(@PathVariable Long studentId) {
+        Student student = studentService.getStudentById(studentId);
+        if (student == null) {
+            return ResponseEntity.notFound().build();
         }
-        @GetMapping("{stuidentAge}")
-        public ResponseEntity getStudentsByAge(@PathVariable int studentAge) {
-            List<Student> students = studentService.getStudentsByAge(studentAge);
-            if (students.size() == 0) {
-                return ResponseEntity.notFound().build();
-            }
-            return ResponseEntity.ok(students);
-        }
+        return ResponseEntity.ok(student);
+    }
 
-        @PutMapping()
-        public ResponseEntity updateStudent(@RequestBody Student student) {
-            Student updatedStudent = studentService.updateStudent(student.getId(), student);
-            return ResponseEntity.ok(updatedStudent);
+    @GetMapping("{stuidentAge}")
+    public ResponseEntity getStudentsByAge(@PathVariable int studentAge) {
+        List<Student> students = studentService.getStudentsByAge(studentAge);
+        if (students.size() == 0) {
+            return ResponseEntity.notFound().build();
         }
+        return ResponseEntity.ok(students);
+    }
 
-        @DeleteMapping("{id}")
-        public Student deleteStudent(@PathVariable Long id) {
-            return studentService.deleteStudent(id);
-        }
+    @PutMapping()
+    public ResponseEntity updateStudent(@RequestBody Student student) {
+        Student updatedStudent = studentService.updateStudent(student.getId(), student);
+        return ResponseEntity.ok(updatedStudent);
+    }
+
+    @DeleteMapping("{id}")
+    public Student deleteStudent(@PathVariable Long id) {
+        return studentService.deleteStudent(id);
+    }
 }

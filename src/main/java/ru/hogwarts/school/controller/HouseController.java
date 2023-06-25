@@ -42,6 +42,7 @@ public class HouseController {
     public Faculty deleteFaculty(@PathVariable Long id) {
         return houseService.deleteFaculty(id);
     }
+
     @GetMapping("{color}")
     public ResponseEntity getSFacultyByColor(@PathVariable String facultyColor) {
         List<Faculty> facultyList = houseService.getFacultiesByColor(facultyColor);
