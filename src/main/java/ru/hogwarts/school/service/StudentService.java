@@ -3,7 +3,9 @@ package ru.hogwarts.school.service;
 import org.springframework.stereotype.Service;
 import ru.hogwarts.school.model.Student;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -18,7 +20,15 @@ public class StudentService {
     public Student getStudentById(Long id){
         return studentMap.get(id);
     }
-    public Student updateStudent(Long id, Student student){
+        public List<Student> getStudentsByAge(int age) {
+            List<Student> students = new ArrayList<>();
+            for (Student student : studentMap.values()) {
+                if (age == student.getAge()) students.add(student);
+            }
+            return students;
+        }
+
+            public Student updateStudent(Long id, Student student){
         studentMap.put(id, student);
         return student;
     }

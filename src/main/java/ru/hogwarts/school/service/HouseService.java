@@ -2,8 +2,11 @@ package ru.hogwarts.school.service;
 
 import org.springframework.stereotype.Service;
 import ru.hogwarts.school.model.Faculty;
+import ru.hogwarts.school.model.Student;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 @Service
 public class HouseService {
@@ -23,5 +26,12 @@ public class HouseService {
     }
     public Faculty deleteFaculty(Long id){
         return facultyMap.remove(id);
+    }
+    public List<Faculty> getFacultiesByColor(String color) {
+        List<Faculty> faculties = new ArrayList<>();
+        for (Faculty faculty : facultyMap.values()) {
+            if (faculty.getColor().contains(color)) faculties.add(faculty);
+        }
+        return faculties;
     }
 }

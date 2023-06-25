@@ -3,7 +3,10 @@ package ru.hogwarts.school.controller;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.hogwarts.school.model.Faculty;
+import ru.hogwarts.school.model.Student;
 import ru.hogwarts.school.service.HouseService;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("faculty")
@@ -38,5 +41,13 @@ public class HouseController {
     @DeleteMapping("{id}")
     public Faculty deleteFaculty(@PathVariable Long id) {
         return houseService.deleteFaculty(id);
+    }
+    @GetMapping("{color}")
+    public ResponseEntity getSFacultyByColor(@PathVariable String facultyColor) {
+        List<Faculty> facultyList = houseService.getFacultiesByColor(facultyColor);
+        if (facultyList.size() == 0) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(facultyList);
     }
 }
