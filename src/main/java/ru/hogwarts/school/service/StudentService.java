@@ -39,4 +39,10 @@ public class StudentService {
     public Student deleteStudent(Long id) {
         return studentMap.remove(id);
     }
+
+    public List<Student> getAllStudents() {
+        List<Student> students = new ArrayList<>();
+        students.addAll(studentMap.values());
+        return students;
+    }
 }

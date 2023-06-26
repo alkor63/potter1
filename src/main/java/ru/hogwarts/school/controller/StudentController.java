@@ -31,7 +31,14 @@ public class StudentController {
         }
         return ResponseEntity.ok(student);
     }
-
+    @GetMapping()
+    public ResponseEntity getAllStudents() {
+        List<Student> students = studentService.getAllStudents();
+        if (students.size() == 0) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(students);
+    }
     @GetMapping("{stuidentAge}")
     public ResponseEntity getStudentsByAge(@PathVariable int studentAge) {
         List<Student> students = studentService.getStudentsByAge(studentAge);
