@@ -22,7 +22,6 @@ public class StudentService {
     public Student getStudentById(Long id) {
         return studentMap.get(id);
     }
-
     public List<Student> getStudentsByAge(int age) {
         List<Student> students = new ArrayList<>();
         for (Student student : studentMap.values()) {
@@ -30,12 +29,10 @@ public class StudentService {
         }
         return students;
     }
-
     public Student updateStudent(Long id, Student student) {
         studentMap.put(id, student);
         return student;
     }
-
     public Student deleteStudent(Long id) {
         return studentMap.remove(id);
     }
