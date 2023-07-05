@@ -19,7 +19,13 @@ public class HouseService {
         return faculty;
     }
     public Faculty getFacultyById(Long id) {
-        return facultyMap.get(id);
+        Faculty faculty;
+        try {
+            faculty = facultyMap.get(id);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        return faculty;
     }
     public Faculty updateFaculty(Long id, Faculty faculty) {
         facultyMap.put(id, faculty);
@@ -32,6 +38,13 @@ public class HouseService {
         List<Faculty> faculties = new ArrayList<>();
         for (Faculty faculty : facultyMap.values()) {
             if (faculty.getColor().contains(color)) faculties.add(faculty);
+        }
+        return faculties;
+    }
+    public List<Faculty> getAllFaculties() {
+        List<Faculty> faculties = new ArrayList<>();
+        for (Faculty faculty : facultyMap.values()) {
+            faculties.add(faculty);
         }
         return faculties;
     }

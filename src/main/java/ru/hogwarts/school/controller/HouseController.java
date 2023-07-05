@@ -21,15 +21,22 @@ public class HouseController {
         return ResponseEntity.ok(createdFaculty);
     }
 
-    @GetMapping("{facultyId}")
-    public ResponseEntity getFaculty(@PathVariable Long facultyId) {
-        Faculty faculty = houseService.getFacultyById(facultyId);
+    @GetMapping("{id}")
+    public ResponseEntity getFaculty(@PathVariable Long id) {
+        Faculty faculty = houseService.getFacultyById(id);
         if (faculty == null) {
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok(faculty);
     }
-
+    @GetMapping()
+    public ResponseEntity getAllFaculties() {
+        List<Faculty> facultyList = houseService.getAllFaculties();
+        if (facultyList.size() == 0) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(facultyList);
+    }
     @PutMapping()
     public ResponseEntity updateFaculty(@RequestBody Faculty faculty) {
         Faculty updatedFaculty = houseService.updateFaculty(faculty.getId(), faculty);
@@ -41,9 +48,9 @@ public class HouseController {
         return houseService.deleteFaculty(id);
     }
 
-    @GetMapping("{color}")
-    public ResponseEntity getSFacultyByColor(@PathVariable String facultyColor) {
-        List<Faculty> facultyList = houseService.getFacultiesByColor(facultyColor);
+    @GetMapping("house/{color}")
+    public ResponseEntity getFacultyByColor(@PathVariable String color) {
+        List<Faculty> facultyList = houseService.getFacultiesByColor(color);
         if (facultyList.size() == 0) {
             return ResponseEntity.notFound().build();
         }

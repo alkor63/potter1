@@ -8,7 +8,7 @@ import ru.hogwarts.school.service.StudentService;
 import java.util.List;
 
 @RestController
-@RequestMapping("student;")
+@RequestMapping("student")
 public class StudentController {
     private final StudentService studentService;
 
@@ -38,7 +38,7 @@ public class StudentController {
         }
         return ResponseEntity.ok(students);
     }
-    @GetMapping("{stuidentAge}")
+    @GetMapping("age/{studentAge}")
     public ResponseEntity getStudentsByAge(@PathVariable int studentAge) {
         List<Student> students = studentService.getStudentsByAge(studentAge);
         if (students.size() == 0) {
